@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'assets/hero2.png',
       'assets/hero3.png',
       'assets/hero4.png',
-      'assets/hero5.png',
     ];
     let heroIndex = 0;
     const changeHeroImage = () => {

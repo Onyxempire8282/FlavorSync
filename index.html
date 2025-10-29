@@ -109,10 +109,15 @@
         </p>
         <form
           class="apply-form"
-          action="mailto:apply@flavorsync.com"
+          name="applications"
           method="POST"
-          enctype="text/plain"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
         >
+          <input type="hidden" name="form-name" value="applications" />
+          <p style="display: none;">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
           <div class="form-row">
             <input
               type="text"
@@ -176,7 +181,7 @@
           &copy;&nbsp;2025 Flavor&nbsp;Sync&nbsp;Communications
         </p>
         <p>
-          Contact: support@flavorsync.com
+          Contact: flavorsynccommunications@gmail.com
         </p>
       </div>
     </footer>
