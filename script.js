@@ -6,16 +6,16 @@
  * images every few seconds and fades testimonials in and out.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Rotating hero background
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector(".hero");
   if (hero) {
     // List of hero image paths relative to the HTML file
     const images = [
-      'assets/hero1.png',
-      'assets/hero2.png',
-      'assets/hero3.png',
-      'assets/hero4.png',
+      "assets/hero1.png",
+      "assets/hero2.png",
+      "assets/hero3.png",
+      "assets/hero4.png",
     ];
     let heroIndex = 0;
     const changeHeroImage = () => {
@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Testimonial carousel
-  const testimonials = document.querySelectorAll('.testimonial');
+  const testimonials = document.querySelectorAll(".testimonial");
   if (testimonials.length > 1) {
     let testimonialIndex = 0;
     const showTestimonial = () => {
       testimonials.forEach((t, idx) => {
-        t.classList.toggle('active', idx === testimonialIndex);
+        t.classList.toggle("active", idx === testimonialIndex);
       });
       testimonialIndex = (testimonialIndex + 1) % testimonials.length;
     };

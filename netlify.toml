@@ -4,7 +4,19 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Form settings
+[forms]
+  spam_filter = true
+
+# Redirects
 [[redirects]]
   from = "/*"
   to = "/index.html"
+  status = 200
+  force = false
+
+# Specific redirect for form submission
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you.html"
   status = 200
