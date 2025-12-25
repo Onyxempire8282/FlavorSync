@@ -10,17 +10,9 @@
 // ============================================
 
 const CONFIG = {
-  heroImageInterval: 5500, // milliseconds
   testimonialInterval: 6500, // milliseconds
   navbarHideDelay: 100, // scroll threshold
 };
-
-const HERO_IMAGES = [
-  './assets/hero1.png',
-  './assets/hero2.png',
-  './assets/hero3.png',
-  './assets/hero4.png',
-];
 
 // ============================================
 // DOM ELEMENT SELECTORS
@@ -168,34 +160,6 @@ class Navigation {
     }
 
     this.lastScrollY = currentScrollY;
-  }
-}
-
-// ============================================
-// HERO BACKGROUND CAROUSEL
-// ============================================
-
-class HeroCarousel {
-  constructor() {
-    this.hero = elements.hero;
-    this.images = HERO_IMAGES;
-    this.currentIndex = 0;
-    this.init();
-  }
-
-  init() {
-    if (!this.hero) return;
-
-    // Set initial background
-    this.changeBackground();
-
-    // Start carousel
-    setInterval(() => this.changeBackground(), CONFIG.heroImageInterval);
-  }
-
-  changeBackground() {
-    this.hero.style.backgroundImage = `url('${this.images[this.currentIndex]}')`;
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 }
 
@@ -481,7 +445,6 @@ function initScrollAnimations() {
 function init() {
   // Initialize all components when DOM is ready
   new Navigation();
-  new HeroCarousel();
   new TestimonialCarousel();
   new FormValidator(elements.form);
   new VideoPlaceholders();
@@ -503,7 +466,6 @@ if (document.readyState === 'loading') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     Navigation,
-    HeroCarousel,
     TestimonialCarousel,
     FormValidator,
     VideoPlaceholders
