@@ -868,16 +868,17 @@ img {
 
 .steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
   margin-top: var(--spacing-xl);
-  grid-auto-rows: 1fr;
   max-width: var(--container-max-width);
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .step {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: var(--white);
@@ -886,12 +887,25 @@ img {
   padding: var(--spacing-lg);
   text-align: center;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 .step:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Arrow between steps - only on desktop */
+.step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: calc(-1 * var(--spacing-xl) / 2);
+  top: 50%;
+  transform: translate(50%, -50%);
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  z-index: 1;
 }
 
 .step-number {
@@ -904,15 +918,13 @@ img {
 .step h3 {
   margin-bottom: var(--spacing-sm);
   text-align: center;
+  color: var(--rose-dark);
 }
 
 .step p {
   font-size: 0.95rem;
+  line-height: 1.6;
   margin: 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* ============================================
@@ -1217,6 +1229,11 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* Hide arrows on mobile when cards stack */
+  .step:not(:last-child)::after {
+    display: none;
+  }
+
   .pay-breakdown {
     grid-template-columns: 1fr;
   }
@@ -1277,6 +1294,15 @@ img {
   .steps {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Show arrows only between cards in the same row */
+  .step:nth-child(odd):not(:last-child)::after {
+    display: block;
+  }
+
+  .step:nth-child(even)::after {
+    display: none;
+  }
 }
 
 /* Large screens (1200px+) */
@@ -1287,6 +1313,11 @@ img {
 
   .steps {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Show all arrows between steps on large screens */
+  .step:not(:last-child)::after {
+    display: block;
   }
 }
 
