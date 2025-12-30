@@ -346,6 +346,10 @@ class FormValidator {
 class VideoPlaceholders {
   constructor() {
     this.placeholders = elements.videoPlaceholders;
+    this.modal = document.getElementById('video-modal');
+    this.modalOverlay = document.querySelector('.video-modal-overlay');
+    this.modalClose = document.querySelector('.video-modal-close');
+    this.iframe = document.getElementById('video-iframe');
     this.init();
   }
 
@@ -363,17 +367,40 @@ class VideoPlaceholders {
       placeholder.setAttribute('tabindex', '0');
       placeholder.setAttribute('role', 'button');
     });
+
+    // Close modal handlers
+    this.modalClose?.addEventListener('click', () => this.closeModal());
+    this.modalOverlay?.addEventListener('click', () => this.closeModal());
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+        this.closeModal();
+      }
+    });
   }
 
   handleClick(placeholder) {
-    // In production, this would load the actual video
-    // For now, just show an alert
-    const videoTitle = placeholder.querySelector('.video-overlay p')?.textContent || 'this video';
-    console.log(`Video clicked: ${videoTitle}`);
+    const videoId = placeholder.getAttribute('data-video-id');
+    if (!videoId) {
+      console.warn('No video ID found for this placeholder');
+      return;
+    }
 
-    // You can replace this with actual video loading logic
-    // For example, opening a modal with an embedded YouTube/Vimeo player
-    alert(`Video functionality will be added here. Selected: ${videoTitle}`);
+    // Build YouTube embed URL with autoplay
+    const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+
+    // Set iframe source and open modal
+    this.iframe.src = videoUrl;
+    this.modal.classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+
+  closeModal() {
+    // Stop video by clearing iframe src
+    this.iframe.src = '';
+    this.modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
   }
 }
 
